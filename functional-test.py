@@ -15,7 +15,7 @@ class NewVisitorTest(unittest.TestCase): #1
 		self.browser.get('http://localhost:8000')
 		
 		# dia sadar page titlenya itu nyebut to-do list
-		self.assertIn('To-Do', self.browser.title) #5
+		self.assertIn('To-Do lists', self.browser.title) #5
 		self.fail('Finish the test') #6
 
 		# dia boleh memasukan item setelahnya
