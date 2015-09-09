@@ -5,7 +5,7 @@ class NewVisitorTest(unittest.TestCase):
 
 	def setUp(self):
 		self.browser = webdriver.Firefox()
-		self.browser.implicitly_wait(3)
+		self.browser.implicitly_wait(10)
 
 	def tearDown(self):
 		self.browser.quit()
@@ -15,10 +15,9 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser.get('http://localhost:8000')
 		
 		# dia sadar page titlenya itu nyebut to-do list
-		self.assertIn('To-Do lists', self.browser.title)
+		self.assertIn('Web Pribadi', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('Web Pribadi Wildan Anky', header_text)
-		self.fail('Finish the test')
 
 		# dia boleh memasukan item setelahnya
 		# dan blah blah blah
