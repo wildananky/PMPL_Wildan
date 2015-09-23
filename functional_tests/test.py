@@ -59,9 +59,8 @@ class NewVisitorTest(LiveServerTestCase):
 			'2: Use peacock feathers to make a fly', [row.text for row in rows]
 		)
 
-
-		self.check_for_row_in_list_table('1: Buy peacock feathers')
 		self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
+		self.check_for_row_in_list_table('1: Buy peacock feathers')
 		# dia boleh memasukan item setelahnya
 		# dan blah blah blah
 		# more blah blah blah
