@@ -16,7 +16,7 @@ class HomePageTest(TestCase):
 	def test_home_page_returns_correct_html(self):
 		request = HttpRequest()
 		response = home_page(request)
-		expected_html = render_to_string('home.html', {'comment': 'yey, waktunya berlibur'})
+		expected_html = render_to_string('home.html')
 
 		self.assertEqual(response.content.decode(), expected_html)
 
@@ -56,47 +56,33 @@ class HomePageTest(TestCase):
 		home_page(request)
 		self.assertEqual(Item.objects.count(), 0)
 
-	def test_home_page_displays_all_list_items(self):
-		Item.objects.create(text='itemey 1')
-		Item.objects.create(text='itemey 2')
+	# # def test_displays_auto_comment_when_empty(self):
+	# # 	request = HttpRequest()
+	# # 	response = home_page(request)
+	# # 	self.assertIn('yey, waktunya berlibur', response.content.decode())
 
-		request = HttpRequest()
-		response = home_page(request)
+	# # def test_displays_auto_comment_when_less_than_5(self):
+	# # 	Item.objects.create(text='itemey 1')
+	# # 	request = HttpRequest()
+	# # 	response = home_page(request)
+	# # 	self.assertIn('sibuk tapi santai', response.content.decode())
 
-		self.assertIn('itemey 1', response.content.decode())
-		self.assertIn('itemey 2', response.content.decode())
+	# # 	Item.objects.create(text='itemey 2')
+	# # 	Item.objects.create(text='itemey 3')
+	# # 	Item.objects.create(text='itemey 4')
+	# # 	response = home_page(request)
+	# # 	self.assertIn('sibuk tapi santai', response.content.decode())
 
-	def test_displays_auto_comment_when_empty(self):
-		request = HttpRequest()
-		response = home_page(request)
-		self.assertIn('yey, waktunya berlibur', response.content.decode())
-
-	def test_displays_auto_comment_when_less_than_5(self):
-		Item.objects.create(text='itemey 1')
-		request = HttpRequest()
-		response = home_page(request)
-		self.assertIn('sibuk tapi santai', response.content.decode())
-
-		Item.objects.create(text='itemey 2')
-		Item.objects.create(text='itemey 3')
-		Item.objects.create(text='itemey 4')
-		response = home_page(request)
-		self.assertIn('sibuk tapi santai', response.content.decode())
-
-	def test_displays_auto_comment_when_greater_than_or_equal_to_5(self):
-		Item.objects.create(text='itemey 1')
-		Item.objects.create(text='itemey 2')
-		Item.objects.create(text='itemey 3')
-		Item.objects.create(text='itemey 4')
-		Item.objects.create(text='itemey 5')
+	# # def test_displays_auto_comment_when_greater_than_or_equal_to_5(self):
+	# # 	Item.objects.create(text='itemey 1')
+	# # 	Item.objects.create(text='itemey 2')
+	# # 	Item.objects.create(text='itemey 3')
+	# # 	Item.objects.create(text='itemey 4')
+	# # 	Item.objects.create(text='itemey 5')
 		
-		request = HttpRequest()
-		response = home_page(request)
-		self.assertIn('oh tidak', response.content.decode())
-
-
-
-
+	# # 	request = HttpRequest()
+	# # 	response = home_page(request)
+	# # 	self.assertIn('oh tidak', response.content.decode()
 
 class ItemModelTest(TestCase):
 	def test_saving_and_retrieving_items(self):
@@ -117,6 +103,10 @@ class ItemModelTest(TestCase):
 		self.assertEqual(second_saved_item.text, 'Item the second')
 
 class ListViewTest(TestCase):
+
+	def test_uses_list_template(self):
+		response = self.client.get('/lists/the-only-list-in-the-world')
+		self.assertTemplateUsed(response, 'list.html')
 
 	def test_displays_all_items(self):
 		Item.objects.create(text='itemey 1')
