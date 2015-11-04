@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3*retn3f^%nyj9)!tyzu+wdooxhn(967wo_svn9q_j)agxwdoc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+TEMPLATE_DEBUG = DEBUG
+# Needed when debug = False
+ALLOWED_HOSTS = ['wildananky.cloudapp.net']
 
 
 # Application definition
