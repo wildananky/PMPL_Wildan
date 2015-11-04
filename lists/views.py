@@ -25,9 +25,7 @@ def view_list(request, list_id):
 
 	#count = items.count()
 	
-	if(count == 0):
-		comment = 'yey, waktunya berlibur'
-	elif(count < 5):
+	if(count < 5):
 		comment = 'sibuk tapi santai'
 	elif(count >= 5):
 		comment = 'oh tidak'
